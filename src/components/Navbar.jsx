@@ -16,11 +16,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Socket.IO server başlat
-    fetch("/api/socket");
+    fetch("/api/socket"); // API route’u başlat
 
-    // Client Socket.IO
-    socket = io({ path: "/api/socket_io" });
+    socket = io(undefined, { path: "/api/socket_io" });
 
     socket.on("connect", () => console.log("Socket bağlandı:", socket.id));
     socket.on("activeUsers", (count) => setActiveUsers(count));
