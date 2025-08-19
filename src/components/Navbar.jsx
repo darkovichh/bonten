@@ -16,13 +16,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Socket.IO server başlat
-    fetch("/api/socket");
-
-    // Client Socket.IO
-    socket = io({ path: "/api/socket_io" });
-
-    socket.on("connect", () => console.log("Socket bağlandı:", socket.id));
+    // Socket.IO client server.js'e bağlanacak
+    socket = io("http://localhost:3001"); // Canlı sunucuda kendi hostunu yaz
     socket.on("activeUsers", (count) => setActiveUsers(count));
 
     return () => socket.disconnect();
@@ -33,12 +28,13 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-container">
+        {/* Left Section */}
         <div className="left-section">
           <a href="#" className="logo">Bonten</a>
 
-          <div className={`nav-links-container ${menuActive ? "active" : ""}`}>
+          <div className={`nav-links-container ${menuActive ? 'active' : ''}`}>
             <ul className="nav-links">
-              <li><a className="active" href="#">Home</a></li>
+              <li><a className='active' href="#">Home</a></li>
               <li><a href="#">Add Paste</a></li>
               <li><a href="#">Upgrades</a></li>
               <li><a href="#">Users</a></li>
@@ -47,7 +43,7 @@ export default function Navbar() {
 
             {windowWidth <= 768 && (
               <ul className="auth-links">
-                <li style={{ color: "#00ff7f" }}>Aktif: {activeUsers}</li>
+                <li style={{ color: '#00ff7f' }}>Aktif: {activeUsers}</li>
                 <li><a href="#">Login</a></li>
                 <li><a href="#">Register</a></li>
               </ul>
@@ -55,16 +51,18 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Desktop Auth Links */}
         {windowWidth > 768 && (
           <div className="auth-links-container">
             <ul className="auth-links">
-              <li style={{ color: "#00ff7f" }}>Aktif: {activeUsers}</li>
+              <li style={{ color: '#00ff7f' }}>Aktif: {activeUsers}</li>
               <li><a href="#">Login</a></li>
               <li><a href="#">Register</a></li>
             </ul>
           </div>
         )}
 
+        {/* Mobile Menu Button */}
         {windowWidth <= 768 && (
           <button className="mobile-menu-btn" onClick={toggleMenu}>☰</button>
         )}
