@@ -1,0 +1,200 @@
+.navbar {
+  background-color: #040404;
+  color: white;
+  padding: 10px 2rem;
+  position: relative; /* mobil menü absolute için parent */
+  z-index: 1000;
+  border-bottom: 1px solid #616161;
+}
+
+/* ----- */
+
+.active {
+    color: #fff;
+}
+
+/* ----- */
+
+.active-users {
+  color: #00ff7f;
+  margin-right: 1rem;
+  cursor: default;
+  font-size: 15px;
+}
+
+.active-users::before {
+  content: "● ";
+  color: #00ff7f; /* yeşil nokta */
+}
+
+/* ----- */
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #616161;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  z-index: 1001; /* menünün üstünde kalır */
+}
+
+/* -------------------- */
+/* NAV LINKS CONTAINER (MOBIL MENÜ ANIMASYONLU) */
+.nav-links-container {
+  font-size: 15px;
+  display: flex;
+  gap: 2rem;
+}
+
+/* Mobil menü ayarları */
+@media (max-width: 768px) {
+  .nav-links-container {
+    position: absolute;
+    top: 100%; /* navbar’ın hemen altından açılır */
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #000;
+    padding: 1rem 0;
+    transform: translateY(-100%); /* başlangıçta gizli */
+    transition: transform 0.3s ease-in-out; /* açılış animasyonu */
+    z-index: 999;
+  }
+
+  .nav-links-container.active {
+    transform: translateY(0); /* menü aşağı açılır */
+  }
+
+  .nav-links,
+  .auth-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch; /* tüm elemanları full width yap */
+    gap: 0;
+  }
+
+  .nav-links li,
+  .auth-links li {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+  }
+
+  .nav-links li:hover,
+  .auth-links li:hover {
+    background-color: #222;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    position: relative;
+    z-index: 1002; /* menünün üstünde kalır */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+/* Desktop nav */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.auth-links-container {
+  display: flex;
+}
+
+.auth-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.nav-links a,
+.auth-links a {
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a:hover,
+.auth-links a:hover {
+  color: #ccc;
+}
+
+.nav-links a::after,
+.auth-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: white;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+/* .nav-links a:hover::after,
+.auth-links a:hover::after {
+  width: 100%;
+  left: 0;
+} */
+
+
+@media (max-width: 768px) {
+  .nav-links-container {
+    position: absolute;
+    top: 0; /* navbar altından 60px boşluk */
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #000;
+    padding: 1rem 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .nav-links-container.active {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive gap ayarları */
+@media (max-width: 1100px) {
+  .left-section {
+    gap: 2rem;
+  }
+  .nav-links,
+  .auth-links {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-links,
+  .auth-links {
+    gap: 1rem;
+  }
+}
